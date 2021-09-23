@@ -1,0 +1,18 @@
+﻿cl : 命令行 warning D9035: “Gm”选项已否决，并将在将来的版本中移除
+  StdAfx.cpp
+  _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
+cl : 命令行 warning D9035: “Gm”选项已否决，并将在将来的版本中移除
+  TCPSocket.cpp
+C:\Users\weiek\source\repos\wxydejoy\EMC\serve\ServerDemo\TCPSocket.cpp(262,3): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\weiek\source\repos\wxydejoy\EMC\serve\ServerDemo\TCPSocket.cpp(371,9): warning C4996: 'gethostbyname': Use getaddrinfo() or GetAddrInfoW() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
+C:\Users\weiek\source\repos\wxydejoy\EMC\serve\ServerDemo\TCPSocket.cpp(630,3): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\weiek\source\repos\wxydejoy\EMC\serve\ServerDemo\TCPSocket.cpp(638,4): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\weiek\source\repos\wxydejoy\EMC\serve\ServerDemo\TCPSocket.cpp(685,6): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\weiek\source\repos\wxydejoy\EMC\serve\ServerDemo\TCPSocket.cpp(703,6): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\weiek\source\repos\wxydejoy\EMC\serve\ServerDemo\TCPSocket.cpp(722,6): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  ServerDemoDlg.cpp
+  ServerDemo.cpp
+C:\Users\weiek\source\repos\wxydejoy\EMC\serve\ServerDemo\ServerDemo.cpp(73,2): warning C4996: 'CWinApp::Enable3dControlsStatic': CWinApp::Enable3dControlsStatic is no longer needed. You should remove this call.
+  Login.cpp
+  正在生成代码...
+  ServerDemo.vcxproj -> C:\Users\weiek\source\repos\wxydejoy\EMC\serve\ServerDemo\Debug\ServerDemo.exe
