@@ -86,6 +86,8 @@ BEGIN_MESSAGE_MAP(CServerDemoDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON_StopServer, OnBUTTONStopServer)
 	ON_BN_CLICKED(IDC_BUTTON_SendData, OnBUTTONSendData)
 	//}}AFX_MSG_MAP
+	ON_STN_CLICKED(IDC_PIC, &CServerDemoDlg::OnStnClickedPic)
+	ON_EN_CHANGE(IDC_EDIT4, &CServerDemoDlg::OnEnChangeEdit4)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -362,3 +364,20 @@ void CServerDemoDlg::DealReceiveData(CString data)
 
 }
 
+
+
+void CServerDemoDlg::OnStnClickedPic()
+{
+	// TODO: 在此添加控件通知处理程序代码
+}
+
+
+void CServerDemoDlg::OnEnChangeEdit4()
+{
+	// TODO:  如果该控件是 RICHEDIT 控件，它将不
+	// 发送此通知，除非重写 CDialog::OnInitDialog()
+	// 函数并调用 CRichEditCtrl().SetEventMask()，
+	// 同时将 ENM_CHANGE 标志“或”运算到掩码中。
+
+	// TODO:  在此添加控件通知处理程序代码
+}

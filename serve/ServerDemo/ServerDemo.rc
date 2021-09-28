@@ -1,4 +1,4 @@
-//Microsoft Developer Studio generated resource script.
+// Microsoft Visual C++ generated resource script.
 //
 #include "resource.h"
 
@@ -13,13 +13,11 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// Chinese (P.R.C.) resources
+// 中文(简体，中国) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
-#ifdef _WIN32
 LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
 #pragma code_page(936)
-#endif //_WIN32
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -27,18 +25,18 @@ LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
 // TEXTINCLUDE
 //
 
-1 TEXTINCLUDE DISCARDABLE 
+1 TEXTINCLUDE 
 BEGIN
     "resource.h\0"
 END
 
-2 TEXTINCLUDE DISCARDABLE 
+2 TEXTINCLUDE 
 BEGIN
     "#include ""afxres.h""\r\n"
     "\0"
 END
 
-3 TEXTINCLUDE DISCARDABLE 
+3 TEXTINCLUDE 
 BEGIN
     "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
     "#define _AFX_NO_OLE_RESOURCES\r\n"
@@ -66,15 +64,16 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDR_MAINFRAME           ICON    DISCARDABLE     "res\\ServerDemo.ico"
+IDR_MAINFRAME           ICON                    "res\\ServerDemo.ico"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // Dialog
 //
 
-IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 235, 55
-STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_ABOUTBOX DIALOG 0, 0, 235, 55
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "关于 ServerDemo"
 FONT 9, "宋体"
 BEGIN
@@ -85,33 +84,36 @@ BEGIN
 END
 
 IDD_SERVERDEMO_DIALOG DIALOGEX 0, 0, 561, 411
-STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_APPWINDOW
 CAPTION "ServerDemo"
 FONT 9, "宋体", 0, 0, 0x1
 BEGIN
-    DEFPUSHBUTTON   "退出",IDOK,446,176,94,46
-    PUSHBUTTON      "开启服务",IDC_BUTTON_StartServer,38,108,87,36
-    PUSHBUTTON      "停止服务",IDC_BUTTON_StopServer,142,108,87,36
-    PUSHBUTTON      "发送数据",IDC_BUTTON_SendData,273,108,87,36
-    GROUPBOX        "服务端开启与关闭",IDC_STATIC,20,24,225,138
-    CTEXT           "",IDC_STATIC_Status,39,47,189,37,SS_CENTERIMAGE | 
-                    SS_SUNKEN
-    GROUPBOX        "服务器数据发送",IDC_STATIC,257,24,284,138
-    EDITTEXT        IDC_EDIT_InPut,269,51,261,26,ES_AUTOHSCROLL
-    LTEXT           "",IDC_PIC,21,178,389,210
+    DEFPUSHBUTTON   "退出",IDOK,470,365,74,27
+    PUSHBUTTON      "开启服务",IDC_BUTTON_StartServer,30,96,77,27
+    PUSHBUTTON      "停止服务",IDC_BUTTON_StopServer,133,97,75,27
+    PUSHBUTTON      "发送数据",IDC_BUTTON_SendData,266,97,78,26
+    GROUPBOX        "服务端开启与关闭",IDC_STATIC,20,24,199,118
+    CTEXT           "",IDC_STATIC_Status,39,47,150,36,SS_CENTERIMAGE | SS_SUNKEN
+    GROUPBOX        "服务器数据发送",IDC_STATIC,244,28,284,112
+    EDITTEXT        IDC_EDIT_InPut,269,51,238,26,ES_AUTOHSCROLL
+    PUSHBUTTON      "发送数据",IDC_BUTTON_SendData2,209,234,78,26
+    GROUPBOX        "常用功能",IDC_STATIC,21,158,284,112
+    CONTROL         "MfcLink1",IDC_MFCLINK1,"MfcLink",WS_TABSTOP,0,0,60,14
+    EDITTEXT        IDC_EDIT2,0,0,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_Time,79,183,81,14,ES_AUTOHSCROLL
+    LTEXT           "定时喷雾",IDC_STATIC,35,185,31,8
 END
 
-IDD_DIALOG_Login DIALOG DISCARDABLE  0, 0, 274, 177
-STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_DIALOG_Login DIALOG 0, 0, 274, 177
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "用户登录"
 FONT 10, "System"
 BEGIN
     DEFPUSHBUTTON   "确定",IDOK,53,112,50,14
     PUSHBUTTON      "退出",IDCANCEL,175,112,50,14
     EDITTEXT        IDC_EDIT_UserName,124,42,40,14,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDIT_PassWord,124,65,40,14,ES_PASSWORD | 
-                    ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_PassWord,124,65,40,14,ES_PASSWORD | ES_AUTOHSCROLL
     LTEXT           "用户名：",IDC_STATIC,80,44,33,8
     LTEXT           "密  码：",IDC_STATIC,80,67,29,8
     PUSHBUTTON      "重置",IDC_BUTTON_Reset,116,112,50,14
@@ -119,7 +121,6 @@ BEGIN
 END
 
 
-#ifndef _MAC
 /////////////////////////////////////////////////////////////////////////////
 //
 // Version
@@ -142,15 +143,13 @@ BEGIN
     BEGIN
         BLOCK "080404B0"
         BEGIN
-            VALUE "CompanyName", "\0"
-            VALUE "FileDescription", "ServerDemo Microsoft 基础类应用程序\0"
-            VALUE "FileVersion", "1, 0, 0, 1\0"
-            VALUE "InternalName", "ServerDemo\0"
-            VALUE "LegalCopyright", "版权所有 (C) 2020\0"
-            VALUE "LegalTrademarks", "\0"
-            VALUE "OriginalFilename", "ServerDemo.EXE\0"
-            VALUE "ProductName", "ServerDemo 应用程序\0"
-            VALUE "ProductVersion", "1, 0, 0, 1\0"
+            VALUE "FileDescription", "ServerDemo Microsoft 基础类应用程序"
+            VALUE "FileVersion", "1, 0, 0, 1"
+            VALUE "InternalName", "ServerDemo"
+            VALUE "LegalCopyright", "版权所有 (C) 2020"
+            VALUE "OriginalFilename", "ServerDemo.EXE"
+            VALUE "ProductName", "ServerDemo 应用程序"
+            VALUE "ProductVersion", "1, 0, 0, 1"
         END
     END
     BLOCK "VarFileInfo"
@@ -159,8 +158,6 @@ BEGIN
     END
 END
 
-#endif    // !_MAC
-
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -168,7 +165,7 @@ END
 //
 
 #ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO DISCARDABLE 
+GUIDELINES DESIGNINFO
 BEGIN
     IDD_ABOUTBOX, DIALOG
     BEGIN
@@ -199,15 +196,47 @@ END
 
 /////////////////////////////////////////////////////////////////////////////
 //
+// Dialog Info
+//
+
+IDD_SERVERDEMO_DIALOG DLGINIT
+BEGIN
+    IDC_MFCLINK1, 0x37c, 157, 0
+0x4d3c, 0x4346, 0x694c, 0x6b6e, 0x555f, 0x6c72, 0x3c3e, 0x4d2f, 0x4346, 
+0x694c, 0x6b6e, 0x555f, 0x6c72, 0x3c3e, 0x464d, 0x4c43, 0x6e69, 0x5f6b, 
+0x7255, 0x506c, 0x6572, 0x6966, 0x3e78, 0x2f3c, 0x464d, 0x4c43, 0x6e69, 
+0x5f6b, 0x7255, 0x506c, 0x6572, 0x6966, 0x3e78, 0x4d3c, 0x4346, 0x694c, 
+0x6b6e, 0x545f, 0x6f6f, 0x746c, 0x7069, 0x3c3e, 0x4d2f, 0x4346, 0x694c, 
+0x6b6e, 0x545f, 0x6f6f, 0x746c, 0x7069, 0x3c3e, 0x464d, 0x4c43, 0x6e69, 
+0x5f6b, 0x7546, 0x6c6c, 0x6554, 0x7478, 0x6f54, 0x6c6f, 0x6974, 0x3e70, 
+0x4146, 0x534c, 0x3c45, 0x4d2f, 0x4346, 0x694c, 0x6b6e, 0x465f, 0x6c75, 
+0x546c, 0x7865, 0x5474, 0x6f6f, 0x746c, 0x7069, "\076" 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_SERVERDEMO_DIALOG AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
 // String Table
 //
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE
 BEGIN
     IDS_ABOUTBOX            "关于 ServerDemo(&A)..."
 END
 
-#endif    // Chinese (P.R.C.) resources
+#endif    // 中文(简体，中国) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
