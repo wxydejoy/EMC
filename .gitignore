@@ -4,4 +4,7 @@
 
 /.vs
 /serve/.vs
-/serve/ServerDemo/.vs/ServerDemo/v16
+/serve/ServerDemo/.vs
+/serve/ServerDemo/Debug
+/serve/ServerDemo/Backup
+
