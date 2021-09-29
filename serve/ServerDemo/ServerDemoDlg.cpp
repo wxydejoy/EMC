@@ -87,7 +87,7 @@ BEGIN_MESSAGE_MAP(CServerDemoDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON_SendData, OnBUTTONSendData)
 	//}}AFX_MSG_MAP
 	ON_STN_CLICKED(IDC_PIC, &CServerDemoDlg::OnStnClickedPic)
-	ON_EN_CHANGE(IDC_EDIT4, &CServerDemoDlg::OnEnChangeEdit4)
+	//ON_EN_CHANGE(IDC_EDIT4, &CServerDemoDlg::OnEnChangeEdit4)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
