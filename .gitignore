@@ -2,9 +2,8 @@
 # 此 .gitignore 文件已由 Microsoft(R) Visual Studio 自动创建。
 ################################################################################
 
-/.vs
-/serve/.vs
-/serve/ServerDemo/.vs
-/serve/ServerDemo/Debug
-/serve/ServerDemo/Backup
+/.vs/
+/serve/.vs/
+/serve/ServerDemo/.vs/
+/serve/ServerDemo/Debug/
 

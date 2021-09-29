@@ -1,2 +1,0 @@
-D:\onedrive\桌面\机电控制\01_范例程序\上位机TCP_Socket通讯例程\登录创建示例6\ServerDemo\Debug\ServerDemo.exe
-D:\Windows\wd\GitHub\EMC\serve\ServerDemo\Debug\ServerDemo.exe
