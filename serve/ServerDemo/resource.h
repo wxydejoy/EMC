@@ -18,6 +18,7 @@
 #define IDC_EDIT_OutInfo                1005
 #define IDC_BUTTON_SendData2            1005
 #define IDC_STATIC_Text1                1006
+#define IDC_STATIC_Status2              1006
 #define IDC_STATIC_Text2                1007
 #define IDC_EDIT_PassWord               1007
 #define IDC_BUTTON_SendData4            1007
@@ -26,6 +27,11 @@
 #define IDC_BUTTON_Reset                1008
 #define IDC_BUTTON_SendData5            1008
 #define IDC_BUTTON_SendData6            1009
+#define IDC_STATIC_Status3              1010
+#define IDC_STATIC_Status4              1011
+#define IDC_STATIC_Status6              1012
+#define IDC_STATIC_Status5              1013
+#define IDC_STATIC_Status7              1014
 #define IDC_Time2                       1016
 #define IDC_Time3                       1017
 #define IDC_COMBO1                      1018
@@ -33,14 +39,19 @@
 #define IDC_CHECK1                      1020
 #define IDC_CHECK2                      1021
 #define IDC_CHECK3                      1022
+#define IDC_PROGRESS1                   1023
+#define IDC_PROGRESS2                   1024
+#define IDC_PROGRESS4                   1026
+#define IDC_STATIC_Status8              1027
+#define IDC_STATIC_Status9              1028
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        132
+#define _APS_NEXT_RESOURCE_VALUE        133
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1021
+#define _APS_NEXT_CONTROL_VALUE         1024
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif
