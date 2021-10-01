@@ -90,6 +90,11 @@ BEGIN_MESSAGE_MAP(CServerDemoDlg, CDialog)
 	//ON_EN_CHANGE(IDC_EDIT4, &CServerDemoDlg::OnEnChangeEdit4)
 	ON_CBN_SELCHANGE(IDC_COMBO1, &CServerDemoDlg::OnCbnSelchangeCombo1)
 	ON_CBN_SELCHANGE(IDC_COMBO2, &CServerDemoDlg::OnCbnSelchangeCombo2)
+	ON_BN_CLICKED(IDC_BUTTON_Help, &CServerDemoDlg::OnBnClickedButtonHelp)
+	ON_BN_CLICKED(IDC_BUTTON_TI, &CServerDemoDlg::OnBnClickedButtonTi)
+	ON_BN_CLICKED(IDC_BUTTON_AQ, &CServerDemoDlg::OnBnClickedButtonAq)
+	ON_BN_CLICKED(IDC_BUTTON_TT, &CServerDemoDlg::OnBnClickedButtonTt)
+	ON_BN_CLICKED(IDC_BUTTON_IM, &CServerDemoDlg::OnBnClickedButtonIm)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -285,18 +290,18 @@ void CServerDemoDlg::DealReceiveData(CString data)
 			AfxExtractSubString(csTemp, data, 3, '_') ;//R
 			int R = atoi(csTemp) ;
 
-			CPen Pen;
-			Pen.CreatePen(PS_SOLID,2,RGB(255, 0, 0));
-			CPen *oldPen;
-			oldPen = pDC->SelectObject(&Pen);
+			//CPen Pen;
+			//Pen.CreatePen(PS_SOLID,2,RGB(255, 0, 0));
+			//CPen *oldPen;
+			//oldPen = pDC->SelectObject(&Pen);
 
 
-			pDC->Ellipse(X-R,Y-R,X+R,Y+R) ;
+			//pDC->Ellipse(X-R,Y-R,X+R,Y+R) ;
 
 
-			pDC->SelectObject(oldPen) ;
-			//删除创建的画笔
-			DeleteObject(Pen) ;
+			//pDC->SelectObject(oldPen) ;
+			////删除创建的画笔
+			//DeleteObject(Pen) ;
 		}
 		else if(csTemp == "Line")
 		{
@@ -312,17 +317,17 @@ void CServerDemoDlg::DealReceiveData(CString data)
 			AfxExtractSubString(csTemp, data, 4, '_') ;//Y
 			int EndY = atoi(csTemp) ;
 
-			CPen Pen;
-			Pen.CreatePen(PS_SOLID,2,RGB(255, 0, 0));
-			CPen *oldPen;
-			oldPen = pDC->SelectObject(&Pen);
+			//CPen Pen;
+			//Pen.CreatePen(PS_SOLID,2,RGB(255, 0, 0));
+			//CPen *oldPen;
+			//oldPen = pDC->SelectObject(&Pen);
 
-			pDC->MoveTo(StartX,StartY) ;
-			pDC->LineTo(EndX,EndY) ;
+			//pDC->MoveTo(StartX,StartY) ;
+			//pDC->LineTo(EndX,EndY) ;
 
-			pDC->SelectObject(oldPen) ;
-			//删除创建的画笔
-			DeleteObject(Pen) ;
+			//pDC->SelectObject(oldPen) ;
+			////删除创建的画笔
+			//DeleteObject(Pen) ;
 		}
 
 	}
@@ -357,4 +362,119 @@ void CServerDemoDlg::OnCbnSelchangeCombo1()
 void CServerDemoDlg::OnCbnSelchangeCombo2()
 {
 	// TODO: 在此添加控件通知处理程序代码
+}
+
+
+void CServerDemoDlg::OnBnClickedButtonHelp()
+{
+	AfxMessageBox("> {命令} {数据}\n>tt30		temperature threshold 温度阈值 30 摄氏度\n> ti30		time interval 时间间隔 30 分钟\n> aq30		Air quality threshold 空气质量阈值 30 单位再议\n>ct30		Current temperature当前 温度 30摄氏度\n> ca30		Current Air quality当前 空气质量 30 单位再议\n> ci30		Current time interval当前 时间间隔 30 分钟\n> wv30		Water volume剩余水量30 单位再议\n> vf30		velocity of flow 当前流速30单位再议\n");
+	
+	
+	// TODO: 在此添加控件通知处理程序代码
+}
+
+
+void CServerDemoDlg::OnBnClickedButtonTi()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	CString senddata = "Test";
+	GetDlgItemText(IDC_EDIT_TI, senddata);
+	senddata = ">aq" + senddata;
+	int nRet = m_psockServer->SendServer(0, senddata.GetBuffer(0), senddata.GetLength());
+	if (nRet > 0)
+	{
+		AfxMessageBox("设置成功！");
+	}
+}
+
+
+void CServerDemoDlg::OnBnClickedButtonAq()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	CString senddata = "Test";
+	GetDlgItemText(IDC_EDIT_AQ, senddata);
+	senddata = ">aq" + senddata;
+	int nRet = m_psockServer->SendServer(0, senddata.GetBuffer(0), senddata.GetLength());
+	if (nRet > 0)
+	{
+		AfxMessageBox("设置成功！");
+	}
+}
+
+
+void CServerDemoDlg::OnBnClickedButtonTt()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	CString senddata = "Test";
+	GetDlgItemText(IDC_EDIT_TT, senddata);
+	senddata = ">aq" + senddata;
+	int nRet = m_psockServer->SendServer(0, senddata.GetBuffer(0), senddata.GetLength());
+	if (nRet > 0)
+	{
+		AfxMessageBox("设置成功！");
+	}
+}
+
+
+void CServerDemoDlg::OnBnClickedButtonIm()
+{
+	int state_ti = ((CButton*)GetDlgItem(IDC_CHECK_TI))->GetCheck();
+	int state_tt = ((CButton*)GetDlgItem(IDC_CHECK_TT))->GetCheck();
+	int state_aq = ((CButton*)GetDlgItem(IDC_CHECK_AQ))->GetCheck();
+	/*CString str;
+	str.Format(_T("%d"), state_aq);
+
+	AfxMessageBox(str);*/
+
+	CString strti,strtt,straq;
+
+	if (state_ti)
+	{
+		
+		CString senddata = "Test";
+		GetDlgItemText(IDC_EDIT_AQ, senddata);
+		
+		senddata = ">aq" + senddata;
+		int nRet = m_psockServer->SendServer(0, senddata.GetBuffer(0), senddata.GetLength());
+		if (nRet > 0)
+		{
+			senddata.Delete(0, 3);
+			strti.Format(_T("时间间隔%s分钟\n"), senddata);
+		}
+	}
+
+	if (state_tt)
+	{
+		
+		CString senddata = "Test";
+		GetDlgItemText(IDC_EDIT_TT, senddata);
+		
+		senddata = ">tt" + senddata;
+		int nRet = m_psockServer->SendServer(0, senddata.GetBuffer(0), senddata.GetLength());
+		if (nRet > 0)
+		{
+			senddata.Delete(0, 3);
+			strtt.Format(_T("温度阈值%s摄氏度\n"), senddata);
+		}
+	}
+
+	if (state_aq)
+	{
+		
+		CString senddata = "Test";
+		GetDlgItemText(IDC_EDIT_TT, senddata);
+		
+		senddata = ">ti" + senddata;
+		int nRet = m_psockServer->SendServer(0, senddata.GetBuffer(0), senddata.GetLength());
+		if (nRet > 0)
+		{
+			senddata.Delete(0, 3);
+			straq.Format(_T("空气质量%s\n"), senddata);
+		}
+	}
+
+
+	AfxMessageBox(strtt + strti + straq);
+
+
 }

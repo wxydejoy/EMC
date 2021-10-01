@@ -68,6 +68,11 @@ public:
 	afx_msg void OnEnChangeEdit4();
 	afx_msg void OnCbnSelchangeCombo1();
 	afx_msg void OnCbnSelchangeCombo2();
+	afx_msg void OnBnClickedButtonHelp();
+	afx_msg void OnBnClickedButtonTi();
+	afx_msg void OnBnClickedButtonAq();
+	afx_msg void OnBnClickedButtonTt();
+	afx_msg void OnBnClickedButtonIm();
 };
 
 //{{AFX_INSERT_LOCATION}}
