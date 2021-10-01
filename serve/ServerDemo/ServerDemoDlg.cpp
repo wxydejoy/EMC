@@ -95,6 +95,9 @@ BEGIN_MESSAGE_MAP(CServerDemoDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON_AQ, &CServerDemoDlg::OnBnClickedButtonAq)
 	ON_BN_CLICKED(IDC_BUTTON_TT, &CServerDemoDlg::OnBnClickedButtonTt)
 	ON_BN_CLICKED(IDC_BUTTON_IM, &CServerDemoDlg::OnBnClickedButtonIm)
+	ON_WM_TIMER()
+	ON_BN_CLICKED(IDC_BUTTON_RF, &CServerDemoDlg::OnBnClickedButtonRf)
+	ON_BN_CLICKED(IDC_BUTTON_WV, &CServerDemoDlg::OnBnClickedButtonWv)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -416,6 +419,20 @@ void CServerDemoDlg::OnBnClickedButtonTt()
 }
 
 
+void CServerDemoDlg::OnBnClickedButtonWv()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	CString senddata = "Test";
+	GetDlgItemText(IDC_EDIT_TT, senddata);
+	senddata = ">wv" + senddata;
+	int nRet = m_psockServer->SendServer(0, senddata.GetBuffer(0), senddata.GetLength());
+	if (nRet > 0)
+	{
+		AfxMessageBox("设置成功！");
+	}
+}
+
+
 void CServerDemoDlg::OnBnClickedButtonIm()
 {
 	int state_ti = ((CButton*)GetDlgItem(IDC_CHECK_TI))->GetCheck();
@@ -478,3 +495,58 @@ void CServerDemoDlg::OnBnClickedButtonIm()
 
 
 }
+
+
+void CServerDemoDlg::OnTimer(UINT_PTR nIDEvent)
+{
+	
+	// 总定时器
+	if (nIDEvent == 1)
+	{
+		CString senddata = ">getstate";
+		int nRet = m_psockServer->SendServer(0, senddata.GetBuffer(0), senddata.GetLength());
+		if (nRet != 1)
+		{	
+			KillTimer(1);
+			AfxMessageBox("发送失败\n请检查当前网络连接！");
+			
+		}
+		else
+		{
+			//更新状态
+		}
+	}
+
+	CDialog::OnTimer(nIDEvent);
+}
+
+
+void CServerDemoDlg::OnBnClickedButtonRf()
+{
+	// TODO: 在此添加控件通知处理程序代码
+
+	CString i;
+	GetDlgItemText(IDC_BUTTON_RF, i); //取按钮标题
+	if (i == _T("启动")) {
+		
+		KillTimer(1);
+		CString senddata = "Test";
+		GetDlgItemText(IDC_EDIT_RF, senddata);
+		int RefreshTime = _ttoi(senddata);
+		if (RefreshTime > 0)
+		{
+			SetTimer(1, RefreshTime * 1000, NULL);
+			GetDlgItem(IDC_BUTTON_RF)->SetWindowText(_T("停止"));
+		}
+		else {
+			AfxMessageBox("设置失败\n请填写正确的刷新频率");
+		}
+	}
+	else {
+
+		GetDlgItem(IDC_BUTTON_RF)->SetWindowText(_T("启动"));
+	}
+}
+	
+
+

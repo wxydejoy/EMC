@@ -44,6 +44,7 @@
 #define IDC_STATIC_Status_TI            1014
 #define IDC_BUTTON_Help                 1015
 #define IDC_Time2                       1016
+#define IDC_Time_WV                     1016
 #define IDC_Time3                       1017
 #define IDC_EDIT_TT                     1017
 #define IDC_COMBO1                      1018
@@ -60,13 +61,16 @@
 #define IDC_PROGRESS_WV                 1023
 #define IDC_PROGRESS2                   1024
 #define IDC_PROGRESS_VF                 1024
-#define IDC_BUTTON_AQ2                  1025
+#define IDC_BUTTON_RF                   1025
 #define IDC_PROGRESS4                   1026
-#define IDC_EDIT_AQ2                    1026
+#define IDC_EDIT_RF                     1026
 #define IDC_STATIC_Status8              1027
 #define IDC_STATIC_Status_AQ            1027
 #define IDC_STATIC_Status9              1028
 #define IDC_STATIC_Status_TT            1028
+#define IDC_STATIC_Status_AQ2           1029
+#define IDC_BUTTON_WV                   1030
+#define IDC_BUTTON_RF2                  1031
 
 // Next default values for new objects
 // 
