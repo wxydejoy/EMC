@@ -49,7 +49,7 @@ void CLogin::OnOK()
 	UpdateData(TRUE) ;//获取编辑输入的内容
 
 	//对固定用户名和密码进行验证
-	if(m_strUserName == "张三" && m_strPassWord == "123456")
+	if(m_strUserName == "123" && m_strPassWord == "123")
 	{
 		CDialog::OnOK();
 	}

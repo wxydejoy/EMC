@@ -56,7 +56,7 @@ protected:
 	//{{AFX_MSG(CServerDemoDlg)
 	virtual BOOL OnInitDialog();
 	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
-	afx_msg void OnPaint();
+	//afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
 	afx_msg void OnBUTTONStartServer();
 	afx_msg void OnBUTTONStopServer();
@@ -66,6 +66,8 @@ protected:
 public:
 	afx_msg void OnStnClickedPic();
 	afx_msg void OnEnChangeEdit4();
+	afx_msg void OnCbnSelchangeCombo1();
+	afx_msg void OnCbnSelchangeCombo2();
 };
 
 //{{AFX_INSERT_LOCATION}}

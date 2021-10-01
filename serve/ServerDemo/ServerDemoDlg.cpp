@@ -88,6 +88,8 @@ BEGIN_MESSAGE_MAP(CServerDemoDlg, CDialog)
 	//}}AFX_MSG_MAP
 	ON_STN_CLICKED(IDC_PIC, &CServerDemoDlg::OnStnClickedPic)
 	//ON_EN_CHANGE(IDC_EDIT4, &CServerDemoDlg::OnEnChangeEdit4)
+	ON_CBN_SELCHANGE(IDC_COMBO1, &CServerDemoDlg::OnCbnSelchangeCombo1)
+	ON_CBN_SELCHANGE(IDC_COMBO2, &CServerDemoDlg::OnCbnSelchangeCombo2)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -151,43 +153,6 @@ void CServerDemoDlg::OnSysCommand(UINT nID, LPARAM lParam)
 	}
 }
 
-// If you add a minimize button to your dialog, you will need the code below
-//  to draw the icon.  For MFC applications using the document/view model,
-//  this is automatically done for you by the framework.
-
-void CServerDemoDlg::OnPaint() 
-{
-	if (IsIconic())
-	{
-		CPaintDC dc(this); // device context for painting
-
-		SendMessage(WM_ICONERASEBKGND, (WPARAM) dc.GetSafeHdc(), 0);
-
-		// Center icon in client rectangle
-		int cxIcon = GetSystemMetrics(SM_CXICON);
-		int cyIcon = GetSystemMetrics(SM_CYICON);
-		CRect rect;
-		GetClientRect(&rect);
-		int x = (rect.Width() - cxIcon + 1) / 2;
-		int y = (rect.Height() - cyIcon + 1) / 2;
-
-		// Draw the icon
-		dc.DrawIcon(x, y, m_hIcon);
-	}
-	else
-	{
-		CDialog::OnPaint();
-	}
-
-	pWnd->Invalidate();
-	pWnd->UpdateWindow() ;
-
-	pDC->Rectangle(0,0,500,300);
-
-
-
-
-}
 
 // The system calls this to obtain the cursor to display while the user drags
 //  the minimized window.
@@ -289,7 +254,7 @@ void CServerDemoDlg::OnBUTTONSendData()
 
 void CServerDemoDlg::DealReceiveData(CString data) 
 {
-
+	AfxMessageBox("jieshou成功！");
 	//将数据中#与&之前的数据提取出来
 	int iPos1 = data.Find("##");
 	int iPos2 = data.Find("&&");
@@ -380,4 +345,16 @@ void CServerDemoDlg::OnEnChangeEdit4()
 	// 同时将 ENM_CHANGE 标志“或”运算到掩码中。
 
 	// TODO:  在此添加控件通知处理程序代码
+}
+
+
+void CServerDemoDlg::OnCbnSelchangeCombo1()
+{
+	// TODO: 在此添加控件通知处理程序代码
+}
+
+
+void CServerDemoDlg::OnCbnSelchangeCombo2()
+{
+	// TODO: 在此添加控件通知处理程序代码
 }
