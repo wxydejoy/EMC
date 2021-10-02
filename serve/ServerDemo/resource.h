@@ -68,7 +68,7 @@
 #define IDC_STATIC_Status_AQ            1027
 #define IDC_STATIC_Status9              1028
 #define IDC_STATIC_Status_TT            1028
-#define IDC_STATIC_Status_AQ2           1029
+#define IDC_STATIC_Status_RF            1029
 #define IDC_BUTTON_WV                   1030
 #define IDC_BUTTON_RF2                  1031
 

@@ -98,6 +98,7 @@ BEGIN_MESSAGE_MAP(CServerDemoDlg, CDialog)
 	ON_WM_TIMER()
 	ON_BN_CLICKED(IDC_BUTTON_RF, &CServerDemoDlg::OnBnClickedButtonRf)
 	ON_BN_CLICKED(IDC_BUTTON_WV, &CServerDemoDlg::OnBnClickedButtonWv)
+	ON_BN_CLICKED(IDC_BUTTON_RF2, &CServerDemoDlg::OnBnClickedButtonRf2)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -262,76 +263,71 @@ void CServerDemoDlg::OnBUTTONSendData()
 
 void CServerDemoDlg::DealReceiveData(CString data) 
 {
-	AfxMessageBox("jieshou成功！");
+	
 	//将数据中#与&之前的数据提取出来
-	int iPos1 = data.Find("##");
-	int iPos2 = data.Find("&&");
+	int iPos1 = data.Find(">");
+	int iPos2 = data.Find("<");
 
 	if(iPos1 >= 0 && (iPos2 > iPos1))
 	{
-		data = data.Left(iPos2) ;
-		int length = data.GetLength() ;
-		data = data.Right(length - iPos1 - 2) ;	
+		//>030100100030110010020<
 
 
-		CString csTemp ;
-		AfxExtractSubString(csTemp, data, 0, '_') ;//指令
+
+		SetDlgItemText(IDC_STATIC_WV, data.Mid(16, 3));//显示水量
+		SetDlgItemText(IDC_STATIC_Status_VF, data.Mid(19, 3));//显示流速
+
+		SetDlgItemText(IDC_STATIC_Status_TI, data.Mid(19, 3));//显示时间间隔
+		SetDlgItemText(IDC_STATIC_Status_TT, data.Mid(19, 3));//温度阈值
+		SetDlgItemText(IDC_STATIC_Status_CT, data.Mid(19, 3));//环境温度
+		SetDlgItemText(IDC_STATIC_Status_CA, data.Mid(19, 3));//环境空气质量
+		SetDlgItemText(IDC_STATIC_Status_AQ, data.Mid(19, 3));//空气质量阈值
+
+		CString rftime = "Test";
+		GetDlgItemText(IDC_EDIT_RF, rftime);
+
+		SetDlgItemText(IDC_STATIC_Status_RF, rftime);//刷新频率
 
 
-		if(csTemp == "Clear")
-		{
-			Invalidate(FALSE);
-		}
-		else if(csTemp == "Circle")
-		{
-			AfxExtractSubString(csTemp, data, 1, '_') ;//X
-			int X = atoi(csTemp) ;
+		//数据转换
+		int ct = _ttoi(data.Mid(1,3));//环境温度
+		int ca = _ttoi(data.Mid(4, 3)); //空气质量3位
+		int ti = _ttoi(data.Mid(7, 3));//时间间隔
+		
+		int tt = _ttoi(data.Mid(10, 3));//温度阈值
+		int aq = _ttoi(data.Mid(13, 3));//空气质量阈值
+		int wv = _ttoi(data.Mid(16, 3));//水量
+		int vf = _ttoi(data.Mid(19, 3));//流速
 
-			AfxExtractSubString(csTemp, data, 2, '_') ;//Y
-			int Y = atoi(csTemp) ;
+		CString wv2,tempt;
+		tempt.Format(_T("%d"),wv / 10);
+		wv2 = "预计还可使用" + tempt + "天";//计算水量剩余使用时间
+		SetDlgItemText(IDC_STATIC_Status_WV2, wv2);//显示
+		//进度条
+		// 
+		CProgressCtrl* pgwv = (CProgressCtrl*)GetDlgItem(IDC_PROGRESS_WV);
+		pgwv->SetRange(0, 100);
+		pgwv->SetPos(wv / 20);
+		
 
-			AfxExtractSubString(csTemp, data, 3, '_') ;//R
-			int R = atoi(csTemp) ;
-
-			//CPen Pen;
-			//Pen.CreatePen(PS_SOLID,2,RGB(255, 0, 0));
-			//CPen *oldPen;
-			//oldPen = pDC->SelectObject(&Pen);
+		CProgressCtrl* pgvf = (CProgressCtrl*)GetDlgItem(IDC_PROGRESS_VF);
+		pgvf->SetRange(0, 100);
+		pgvf->SetPos(vf);
 
 
-			//pDC->Ellipse(X-R,Y-R,X+R,Y+R) ;
+
+		//int RefreshTime = _ttoi(senddata);//转换为整数
 
 
-			//pDC->SelectObject(oldPen) ;
-			////删除创建的画笔
-			//DeleteObject(Pen) ;
-		}
-		else if(csTemp == "Line")
-		{
-			AfxExtractSubString(csTemp, data, 1, '_') ;//X
-			int StartX = atoi(csTemp) ;
+		//SetDlgItemText(IDC_STATIC_WV, "启动服务出错!");
 
-			AfxExtractSubString(csTemp, data, 2, '_') ;//Y
-			int StartY = atoi(csTemp) ;
 
-			AfxExtractSubString(csTemp, data, 3, '_') ;//X
-			int EndX = atoi(csTemp) ;
 
-			AfxExtractSubString(csTemp, data, 4, '_') ;//Y
-			int EndY = atoi(csTemp) ;
 
-			//CPen Pen;
-			//Pen.CreatePen(PS_SOLID,2,RGB(255, 0, 0));
-			//CPen *oldPen;
-			//oldPen = pDC->SelectObject(&Pen);
-
-			//pDC->MoveTo(StartX,StartY) ;
-			//pDC->LineTo(EndX,EndY) ;
-
-			//pDC->SelectObject(oldPen) ;
-			////删除创建的画笔
-			//DeleteObject(Pen) ;
-		}
+		CString str;
+		str.Format(_T("%s"), data);
+		AfxMessageBox(str);
+	
 
 	}
 
@@ -505,7 +501,7 @@ void CServerDemoDlg::OnTimer(UINT_PTR nIDEvent)
 	{
 		CString senddata = ">getstate";
 		int nRet = m_psockServer->SendServer(0, senddata.GetBuffer(0), senddata.GetLength());
-		if (nRet != 1)
+		if (nRet <= 0)
 		{	
 			KillTimer(1);
 			AfxMessageBox("发送失败\n请检查当前网络连接！");
@@ -550,3 +546,19 @@ void CServerDemoDlg::OnBnClickedButtonRf()
 	
 
 
+
+
+void CServerDemoDlg::OnBnClickedButtonRf2()
+{
+	CString senddata = ">getstate";
+	int nRet = m_psockServer->SendServer(0, senddata.GetBuffer(0), senddata.GetLength());
+	if (nRet <= 0)
+	{
+		AfxMessageBox("发送失败\n请检查当前网络连接！");
+
+	}
+	else
+	{
+		AfxMessageBox("设置成功");
+	}
+}
