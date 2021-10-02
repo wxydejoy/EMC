@@ -71,6 +71,8 @@
 #define IDC_STATIC_Status_RF            1029
 #define IDC_BUTTON_WV                   1030
 #define IDC_BUTTON_RF2                  1031
+#define IDC_STATIC_Status_WV3           1032
+#define IDC_STATIC_Status_ON            1032
 
 // Next default values for new objects
 // 

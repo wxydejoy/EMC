@@ -320,13 +320,20 @@ void CServerDemoDlg::DealReceiveData(CString data)
 
 
 		//SetDlgItemText(IDC_STATIC_WV, "启动服务出错!");
+		if (data.Mid(22, 3) == "001")
+		{
+				SetDlgItemText(IDC_STATIC_Status_ON, "系统运行中");
+		}
+		else
+		{
+			SetDlgItemText(IDC_STATIC_Status_ON, "系统未运行");
+		}
 
 
 
-
-		CString str;
+		/*CString str;
 		str.Format(_T("%s"), data);
-		AfxMessageBox(str);
+		AfxMessageBox(str);*/
 	
 
 	}
