@@ -77,6 +77,7 @@ public:
 	afx_msg void OnBnClickedButtonRf();
 	afx_msg void OnBnClickedButtonAq2();
 	afx_msg void OnBnClickedButtonWv();
+	afx_msg void OnBnClickedButtonRf2();
 };
 
 //{{AFX_INSERT_LOCATION}}

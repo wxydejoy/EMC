@@ -539,7 +539,7 @@ void CServerDemoDlg::OnBnClickedButtonRf()
 		}
 	}
 	else {
-
+		KillTimer(1);
 		GetDlgItem(IDC_BUTTON_RF)->SetWindowText(_T("Æô¶¯"));
 	}
 }
