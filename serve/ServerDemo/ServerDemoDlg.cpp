@@ -256,9 +256,14 @@ void CServerDemoDlg::OnBUTTONSendData()
 	int nRet = m_psockServer->SendServer(0,senddata.GetBuffer(0),senddata.GetLength());
 	if(nRet > 0)
 	{
-		AfxMessageBox("发送成功！") ;
+		CString sendstr;
+		sendstr.Format(_T("%s已发送成功\n"), senddata);
+		AfxMessageBox("sendstr") ;
 	}
-
+	else
+	{
+		AfxMessageBox("请检查网络连接！");
+	}
 }
 
 void CServerDemoDlg::DealReceiveData(CString data) 
@@ -373,7 +378,7 @@ void CServerDemoDlg::OnCbnSelchangeCombo2()
 
 void CServerDemoDlg::OnBnClickedButtonHelp()
 {
-	AfxMessageBox("> {命令} {数据}\n>tt30		temperature threshold 温度阈值 30 摄氏度\n> ti30		time interval 时间间隔 30 分钟\n> aq30		Air quality threshold 空气质量阈值 30 单位再议\n>ct30		Current temperature当前 温度 30摄氏度\n> ca30		Current Air quality当前 空气质量 30 单位再议\n> ci30		Current time interval当前 时间间隔 30 分钟\n> wv30		Water volume剩余水量30 单位再议\n> vf30		velocity of flow 当前流速30单位再议\n");
+	AfxMessageBox("> {命令} {数据}\n>tt30		temperature threshold 温度阈值 30 摄氏度\n> ti30		time interval 时间间隔 30 分钟\n> aq30		Air quality threshold 空气质量阈值 30 单位再议\n");
 	
 	
 	// TODO: 在此添加控件通知处理程序代码
@@ -389,7 +394,13 @@ void CServerDemoDlg::OnBnClickedButtonTi()
 	int nRet = m_psockServer->SendServer(0, senddata.GetBuffer(0), senddata.GetLength());
 	if (nRet > 0)
 	{
-		AfxMessageBox("设置成功！");
+		CString sendstr;
+		sendstr.Format(_T("%s已设置成功\n"), senddata);
+		AfxMessageBox("sendstr");
+	}
+	else
+	{
+		AfxMessageBox("请检查网络连接");
 	}
 }
 
@@ -403,7 +414,13 @@ void CServerDemoDlg::OnBnClickedButtonAq()
 	int nRet = m_psockServer->SendServer(0, senddata.GetBuffer(0), senddata.GetLength());
 	if (nRet > 0)
 	{
-		AfxMessageBox("设置成功！");
+		CString sendstr;
+		sendstr.Format(_T("%s已设置成功\n"), senddata);
+		AfxMessageBox("sendstr");
+	}
+	else
+	{
+		AfxMessageBox("请检查网络连接");
 	}
 }
 
@@ -417,7 +434,13 @@ void CServerDemoDlg::OnBnClickedButtonTt()
 	int nRet = m_psockServer->SendServer(0, senddata.GetBuffer(0), senddata.GetLength());
 	if (nRet > 0)
 	{
-		AfxMessageBox("设置成功！");
+		CString sendstr;
+		sendstr.Format(_T("%s已设置成功\n"), senddata);
+		AfxMessageBox("sendstr");
+	}
+	else
+	{
+		AfxMessageBox("请检查网络连接");
 	}
 }
 
@@ -431,7 +454,13 @@ void CServerDemoDlg::OnBnClickedButtonWv()
 	int nRet = m_psockServer->SendServer(0, senddata.GetBuffer(0), senddata.GetLength());
 	if (nRet > 0)
 	{
-		AfxMessageBox("设置成功！");
+		CString sendstr;
+		sendstr.Format(_T("%s已设置成功\n"), senddata);
+		AfxMessageBox("sendstr");
+	}
+	else
+	{
+		AfxMessageBox("请检查网络连接");
 	}
 }
 
