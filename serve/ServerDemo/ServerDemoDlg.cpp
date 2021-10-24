@@ -99,6 +99,9 @@ BEGIN_MESSAGE_MAP(CServerDemoDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON_RF, &CServerDemoDlg::OnBnClickedButtonRf)
 	ON_BN_CLICKED(IDC_BUTTON_WV, &CServerDemoDlg::OnBnClickedButtonWv)
 	ON_BN_CLICKED(IDC_BUTTON_RF2, &CServerDemoDlg::OnBnClickedButtonRf2)
+	ON_BN_CLICKED(IDC_BUTTON_IM2, &CServerDemoDlg::OnBnClickedButtonIm2)
+	ON_STN_CLICKED(IDC_STATIC_Status_WV2, &CServerDemoDlg::OnStnClickedStaticStatusWv2)
+	ON_STN_CLICKED(IDC_STATIC_Status_VF, &CServerDemoDlg::OnStnClickedStaticStatusVf)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -257,7 +260,7 @@ void CServerDemoDlg::OnBUTTONSendData()
 	if(nRet > 0)
 	{
 		CString sendstr;
-		sendstr.Format(_T("%s已发送成功\n"), senddata);
+		sendstr.Format(_T("指令%s已发送成功\n"), senddata);
 		AfxMessageBox(sendstr) ;
 	}
 	else
@@ -279,14 +282,14 @@ void CServerDemoDlg::DealReceiveData(CString data)
 
 
 
-		SetDlgItemText(IDC_STATIC_WV, data.Mid(16, 3));//显示水量
-		SetDlgItemText(IDC_STATIC_Status_VF, data.Mid(19, 3));//显示流速
+		SetDlgItemText(IDC_STATIC_WV, data.Mid(17, 2) + "%");//显示水量
+		//SetDlgItemText(IDC_STATIC_Status_VF, data.Mid(19, 3));//显示流速
 
-		SetDlgItemText(IDC_STATIC_Status_TI, data.Mid(19, 3));//显示时间间隔
-		SetDlgItemText(IDC_STATIC_Status_TT, data.Mid(19, 3));//温度阈值
-		SetDlgItemText(IDC_STATIC_Status_CT, data.Mid(19, 3));//环境温度
-		SetDlgItemText(IDC_STATIC_Status_CA, data.Mid(19, 3));//环境空气质量
-		SetDlgItemText(IDC_STATIC_Status_AQ, data.Mid(19, 3));//空气质量阈值
+		SetDlgItemText(IDC_STATIC_Status_TI, data.Mid(7, 3) + "分钟");//显示时间间隔
+		SetDlgItemText(IDC_STATIC_Status_TT, data.Mid(11, 2) + "摄氏度");//温度阈值
+		SetDlgItemText(IDC_STATIC_Status_CT, data.Mid(2, 2)+ "摄氏度");//环境温度
+		SetDlgItemText(IDC_STATIC_Status_CA, data.Mid(4, 3));//环境空气质量
+		SetDlgItemText(IDC_STATIC_Status_AQ, data.Mid(15, 3));//空气质量阈值
 
 		CString rftime = "Test";
 		GetDlgItemText(IDC_EDIT_RF, rftime);
@@ -312,7 +315,7 @@ void CServerDemoDlg::DealReceiveData(CString data)
 		// 
 		CProgressCtrl* pgwv = (CProgressCtrl*)GetDlgItem(IDC_PROGRESS_WV);
 		pgwv->SetRange(0, 100);
-		pgwv->SetPos(wv / 20);
+		pgwv->SetPos(wv);
 		
 
 		CProgressCtrl* pgvf = (CProgressCtrl*)GetDlgItem(IDC_PROGRESS_VF);
@@ -325,7 +328,7 @@ void CServerDemoDlg::DealReceiveData(CString data)
 
 
 		//SetDlgItemText(IDC_STATIC_WV, "启动服务出错!");
-		if (data.Mid(22, 3) == "001")
+		if (data.Mid(19, 1) == "1")
 		{
 				SetDlgItemText(IDC_STATIC_Status_ON, "系统运行中");
 		}
@@ -395,7 +398,7 @@ void CServerDemoDlg::OnBnClickedButtonTi()
 	if (nRet > 0)
 	{
 		CString sendstr;
-		sendstr.Format(_T("%s已设置成功\n"), senddata);
+		sendstr.Format(_T("时间间隔%s分钟已设置成功\n"), senddata.Mid(3, 2));
 		AfxMessageBox(sendstr);
 	}
 	else
@@ -407,7 +410,7 @@ void CServerDemoDlg::OnBnClickedButtonTi()
 
 void CServerDemoDlg::OnBnClickedButtonAq()
 {
-	// TODO: 在此添加控件通知处理程序代码
+	// 这个不能用了，用Im2，莫名其妙的bug
 	CString senddata = "Test";
 	GetDlgItemText(IDC_EDIT_AQ, senddata);
 	senddata = ">aq" + senddata;
@@ -415,7 +418,25 @@ void CServerDemoDlg::OnBnClickedButtonAq()
 	if (nRet > 0)
 	{
 		CString sendstr;
-		sendstr.Format(_T("%s已设置成功\n"), senddata);
+		sendstr.Format(_T("颗粒浓度%s已设置成功\n"), senddata.Mid(3, 3));
+		AfxMessageBox(sendstr);
+	}
+	else
+	{
+		AfxMessageBox("请检查网络连接");
+	}
+}
+
+void CServerDemoDlg::OnBnClickedButtonIm2()
+{
+	CString senddata = "Test";
+	GetDlgItemText(IDC_EDIT_AQ, senddata);
+	senddata = ">aq" + senddata;
+	int nRet = m_psockServer->SendServer(0, senddata.GetBuffer(0), senddata.GetLength());
+	if (nRet > 0)
+	{
+		CString sendstr;
+		sendstr.Format(_T("颗粒浓度%s已设置成功\n"), senddata.Mid(3, 3));
 		AfxMessageBox(sendstr);
 	}
 	else
@@ -435,7 +456,7 @@ void CServerDemoDlg::OnBnClickedButtonTt()
 	if (nRet > 0)
 	{
 		CString sendstr;
-		sendstr.Format(_T("%s已设置成功\n"), senddata);
+		sendstr.Format(_T("温度阈值%s已设置成功\n"), senddata.Mid(3,3));
 		AfxMessageBox(sendstr);
 	}
 	else
@@ -449,13 +470,13 @@ void CServerDemoDlg::OnBnClickedButtonWv()
 {
 	// TODO: 在此添加控件通知处理程序代码
 	CString senddata = "Test";
-	GetDlgItemText(IDC_EDIT_TT, senddata);
+	GetDlgItemText(IDC_Time_WV, senddata);
 	senddata = ">wv" + senddata;
 	int nRet = m_psockServer->SendServer(0, senddata.GetBuffer(0), senddata.GetLength());
 	if (nRet > 0)
 	{
 		CString sendstr;
-		sendstr.Format(_T("%s已设置成功\n"), senddata);
+		sendstr.Format(_T("单次水量%sL\n已设置成功\n"), senddata.Mid(3, 2));
 		AfxMessageBox(sendstr);
 	}
 	else
@@ -467,6 +488,7 @@ void CServerDemoDlg::OnBnClickedButtonWv()
 
 void CServerDemoDlg::OnBnClickedButtonIm()
 {
+	int state = 0;
 	int state_ti = ((CButton*)GetDlgItem(IDC_CHECK_TI))->GetCheck();
 	int state_tt = ((CButton*)GetDlgItem(IDC_CHECK_TT))->GetCheck();
 	int state_aq = ((CButton*)GetDlgItem(IDC_CHECK_AQ))->GetCheck();
@@ -487,6 +509,7 @@ void CServerDemoDlg::OnBnClickedButtonIm()
 		int nRet = m_psockServer->SendServer(0, senddata.GetBuffer(0), senddata.GetLength());
 		if (nRet > 0)
 		{
+			state += 1;
 			senddata.Delete(0, 3);
 			strti.Format(_T("时间间隔%s分钟\n"), senddata);
 		}
@@ -495,6 +518,7 @@ void CServerDemoDlg::OnBnClickedButtonIm()
 	if (state_tt)
 	{
 		
+		state += 1;
 		CString senddata = "Test";
 		GetDlgItemText(IDC_EDIT_TT, senddata);
 		
@@ -510,6 +534,7 @@ void CServerDemoDlg::OnBnClickedButtonIm()
 	if (state_aq)
 	{
 		
+		state += 1;
 		CString senddata = "Test";
 		GetDlgItemText(IDC_EDIT_TT, senddata);
 		
@@ -521,9 +546,17 @@ void CServerDemoDlg::OnBnClickedButtonIm()
 			straq.Format(_T("空气质量%s\n"), senddata);
 		}
 	}
+	if (state >= 1)
+	{
+		 AfxMessageBox(strtt + strti + straq);
 
+	}
+	else
+	{
+		AfxMessageBox("发送失败\n请检查当前网络连接！");
+	}
 
-	AfxMessageBox(strtt + strti + straq);
+	
 
 
 }
@@ -564,11 +597,16 @@ void CServerDemoDlg::OnBnClickedButtonRf()
 		KillTimer(1);
 		CString senddata = "Test";
 		GetDlgItemText(IDC_EDIT_RF, senddata);
+		SetDlgItemText(IDC_STATIC_Status_RF,senddata + "分钟");//显示时间间隔
 		int RefreshTime = _ttoi(senddata);
 		if (RefreshTime > 0)
 		{
-			SetTimer(1, RefreshTime * 1000, NULL);
+			SetTimer(1, RefreshTime * 1000 , NULL);
 			GetDlgItem(IDC_BUTTON_RF)->SetWindowText(_T("停止"));
+
+			//senddata.Format(_T("刷新频率%s分钟\n已设置成功\n"), senddata);
+			//AfxMessageBox(senddata);
+			
 		}
 		else {
 			AfxMessageBox("设置失败\n请填写正确的刷新频率");
@@ -597,4 +635,17 @@ void CServerDemoDlg::OnBnClickedButtonRf2()
 	{
 		AfxMessageBox("设置成功");
 	}
+}
+
+
+
+void CServerDemoDlg::OnStnClickedStaticStatusWv2()
+{
+	// TODO: 在此添加控件通知处理程序代码
+}
+
+
+void CServerDemoDlg::OnStnClickedStaticStatusVf()
+{
+	// TODO: 在此添加控件通知处理程序代码
 }
