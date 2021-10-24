@@ -258,7 +258,7 @@ void CServerDemoDlg::OnBUTTONSendData()
 	{
 		CString sendstr;
 		sendstr.Format(_T("%s已发送成功\n"), senddata);
-		AfxMessageBox("sendstr") ;
+		AfxMessageBox(sendstr) ;
 	}
 	else
 	{
@@ -396,7 +396,7 @@ void CServerDemoDlg::OnBnClickedButtonTi()
 	{
 		CString sendstr;
 		sendstr.Format(_T("%s已设置成功\n"), senddata);
-		AfxMessageBox("sendstr");
+		AfxMessageBox(sendstr);
 	}
 	else
 	{
@@ -416,7 +416,7 @@ void CServerDemoDlg::OnBnClickedButtonAq()
 	{
 		CString sendstr;
 		sendstr.Format(_T("%s已设置成功\n"), senddata);
-		AfxMessageBox("sendstr");
+		AfxMessageBox(sendstr);
 	}
 	else
 	{
@@ -436,7 +436,7 @@ void CServerDemoDlg::OnBnClickedButtonTt()
 	{
 		CString sendstr;
 		sendstr.Format(_T("%s已设置成功\n"), senddata);
-		AfxMessageBox("sendstr");
+		AfxMessageBox(sendstr);
 	}
 	else
 	{
@@ -456,7 +456,7 @@ void CServerDemoDlg::OnBnClickedButtonWv()
 	{
 		CString sendstr;
 		sendstr.Format(_T("%s已设置成功\n"), senddata);
-		AfxMessageBox("sendstr");
+		AfxMessageBox(sendstr);
 	}
 	else
 	{
