@@ -102,6 +102,7 @@ BEGIN_MESSAGE_MAP(CServerDemoDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON_IM2, &CServerDemoDlg::OnBnClickedButtonIm2)
 	ON_STN_CLICKED(IDC_STATIC_Status_WV2, &CServerDemoDlg::OnStnClickedStaticStatusWv2)
 	ON_STN_CLICKED(IDC_STATIC_Status_VF, &CServerDemoDlg::OnStnClickedStaticStatusVf)
+	ON_STN_CLICKED(IDC_STATIC_Status, &CServerDemoDlg::OnStnClickedStaticStatus)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -597,7 +598,7 @@ void CServerDemoDlg::OnBnClickedButtonRf()
 		KillTimer(1);
 		CString senddata = "Test";
 		GetDlgItemText(IDC_EDIT_RF, senddata);
-		SetDlgItemText(IDC_STATIC_Status_RF,senddata + "分钟");//显示时间间隔
+		SetDlgItemText(IDC_STATIC_Status_RF,senddata + "秒");//显示时间间隔
 		int RefreshTime = _ttoi(senddata);
 		if (RefreshTime > 0)
 		{
@@ -646,6 +647,12 @@ void CServerDemoDlg::OnStnClickedStaticStatusWv2()
 
 
 void CServerDemoDlg::OnStnClickedStaticStatusVf()
+{
+	// TODO: 在此添加控件通知处理程序代码
+}
+
+
+void CServerDemoDlg::OnStnClickedStaticStatus()
 {
 	// TODO: 在此添加控件通知处理程序代码
 }
