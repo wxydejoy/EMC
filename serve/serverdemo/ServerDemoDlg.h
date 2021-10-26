@@ -78,6 +78,10 @@ public:
 	afx_msg void OnBnClickedButtonAq2();
 	afx_msg void OnBnClickedButtonWv();
 	afx_msg void OnBnClickedButtonRf2();
+	afx_msg void OnBnClickedButtonIm2();
+	afx_msg void OnStnClickedStaticStatusWv2();
+	afx_msg void OnStnClickedStaticStatusVf();
+	afx_msg void OnStnClickedStaticStatus();
 };
 
 //{{AFX_INSERT_LOCATION}}
