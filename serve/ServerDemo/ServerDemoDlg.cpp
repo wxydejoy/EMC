@@ -176,29 +176,80 @@ HCURSOR CServerDemoDlg::OnQueryDragIcon()
 
 void CServerDemoDlg::OnBUTTONStartServer() 
 {
-	if(!m_bServerCreated)
-	{
-		if(!m_psockServer->CreateServer(m_nPortLocal,5))
+	CString i;
+	GetDlgItemText(IDC_BUTTON_StartServer, i); //取按钮标题
+	
+	if (i == _T("点击启动服务")) {
+
+		if (!m_bServerCreated)
 		{
-			AfxMessageBox("创建服务器出错!");
+			if (!m_psockServer->CreateServer(m_nPortLocal, 5))
+			{
+				AfxMessageBox("创建服务器出错!");
 
-			SetDlgItemText(IDC_STATIC_Status,"创建服务器出错！") ;
+				SetDlgItemText(IDC_STATIC_Status, "创建服务器出错！");
 
-			return;
+				return;
+			}
+
+			if (!m_psockServer->StartServer(OnStatusChange, OnDataArrived, (DWORD)this))
+			{
+				AfxMessageBox("启动服务出错!");
+
+				SetDlgItemText(IDC_STATIC_Status, "启动服务出错!");
+
+				m_psockServer->Close();
+				return;
+			}
+
+			m_bServerCreated = TRUE;
+
+			SetDlgItemText(IDC_STATIC_Status, "服务已开启!");
+			GetDlgItem(IDC_BUTTON_StartServer)->SetWindowText(_T("点击停止服务"));
 		}
-		if(!m_psockServer->StartServer(OnStatusChange,OnDataArrived,(DWORD)this))
-		{
-			AfxMessageBox("启动服务出错!");
-
-			SetDlgItemText(IDC_STATIC_Status,"启动服务出错!") ;
-
-			m_psockServer->Close();
-			return;
-		}
-		m_bServerCreated = TRUE;
-
-		SetDlgItemText(IDC_STATIC_Status,"服务已开启!") ;
+		
 	}
+	if (i == _T("点击停止服务")) {
+		
+		m_psockServer->Close();
+
+		m_bServerCreated = FALSE;
+
+		SetDlgItemText(IDC_STATIC_Status, "服务未开启!");
+
+		GetDlgItem(IDC_BUTTON_StartServer)->SetWindowText(_T("点击启动服务"));
+	}
+
+
+
+	
+
+
+
+	//if(!m_bServerCreated)
+	//{
+	//	if(!m_psockServer->CreateServer(m_nPortLocal,5))
+	//	{
+	//		AfxMessageBox("创建服务器出错!");
+
+	//		SetDlgItemText(IDC_STATIC_Status,"创建服务器出错！") ;
+
+	//		return;
+	//	}
+	//	if(!m_psockServer->StartServer(OnStatusChange,OnDataArrived,(DWORD)this))
+	//	{
+	//		AfxMessageBox("启动服务出错!");
+
+	//		SetDlgItemText(IDC_STATIC_Status,"启动服务出错!") ;
+
+	//		m_psockServer->Close();
+	//		return;
+	//	}
+	//	m_bServerCreated = TRUE;
+
+	//	SetDlgItemText(IDC_STATIC_Status,"服务已开启!") ;
+	//	GetDlgItem(IDC_BUTTON_StartServer)->SetWindowText(_T("点击停止服务"));
+	//}
 }
 
 void CServerDemoDlg::OnStatusChange(char *data,int length,DWORD userdata)
@@ -498,7 +549,7 @@ void CServerDemoDlg::OnBnClickedButtonIm()
 
 	AfxMessageBox(str);*/
 
-	CString strti,strtt,straq;
+	CString strti,strtt,straq,strwv;
 
 	if (state_ti)
 	{
@@ -533,7 +584,7 @@ void CServerDemoDlg::OnBnClickedButtonIm()
 	}
 
 	if (state_aq)
-	{
+	{//颗粒浓度
 		
 		state += 1;
 		CString senddata = "Test";
@@ -547,9 +598,24 @@ void CServerDemoDlg::OnBnClickedButtonIm()
 			straq.Format(_T("空气质量%s\n"), senddata);
 		}
 	}
+
+	//水量设置
+	CString senddata = "Test";
+	GetDlgItemText(IDC_Time_WV, senddata);
+	senddata = ">wv" + senddata;
+	int nRet = m_psockServer->SendServer(0, senddata.GetBuffer(0), senddata.GetLength());
+	if (nRet > 0)
+	{
+		senddata.Delete(0, 3);
+		strwv.Format(_T("单次水量%s升\n"), senddata);
+	}
+
+
+
+
 	if (state >= 1)
 	{
-		 AfxMessageBox(strtt + strti + straq);
+		 AfxMessageBox(strtt + strti + straq + strwv);
 
 	}
 	else
